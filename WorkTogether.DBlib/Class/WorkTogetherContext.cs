@@ -36,20 +36,14 @@ public partial class WorkTogetherContext : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+
         => optionsBuilder.UseSqlServer("Server=localhost;Database=WorkTogether;Trusted_Connection=True;TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Customer>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__customer__3213E83FA73BB55D");
-
-            entity.ToTable("customer");
-
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("id");
+            entity.ToTable(nameof(Customer));
             entity.Property(e => e.Birthday).HasColumnName("birthday");
             entity.Property(e => e.FirstName)
                 .HasMaxLength(255)
@@ -57,10 +51,6 @@ public partial class WorkTogetherContext : DbContext
             entity.Property(e => e.LastName)
                 .HasMaxLength(255)
                 .HasColumnName("last_name");
-
-            entity.HasOne(d => d.IdNavigation).WithOne(p => p.Customer)
-                .HasForeignKey<Customer>(d => d.Id)
-                .HasConstraintName("FK_81398E09BF396750");
         });
 
         modelBuilder.Entity<DoctrineMigrationVersion>(entity =>
@@ -242,6 +232,7 @@ public partial class WorkTogetherContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
+            entity.ToTable(nameof(User));
             entity.HasKey(e => e.Id).HasName("PK__user__3213E83FA71D11A0");
 
             entity.ToTable("user");
@@ -251,9 +242,6 @@ public partial class WorkTogetherContext : DbContext
                 .HasFilter("([email] IS NOT NULL)");
 
             entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.Discr)
-                .HasMaxLength(255)
-                .HasColumnName("discr");
             entity.Property(e => e.Email)
                 .HasMaxLength(180)
                 .HasColumnName("email");
