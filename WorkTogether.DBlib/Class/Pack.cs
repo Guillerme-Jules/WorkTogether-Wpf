@@ -16,7 +16,7 @@ public partial class Pack : IEditableObject
     public int NumberSlot { get; set; }
 
     public virtual ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
-
+    
     private Pack backupCopy;
 
 

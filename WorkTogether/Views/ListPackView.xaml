@@ -6,17 +6,61 @@
              xmlns:local="clr-namespace:WorkTogether.Wpf.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="DarkBlue" ShowGridLines="True">
+    <Grid Background="Chartreuse" ShowGridLines="True">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="100"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <ListBox Grid.Row="1" Grid.Column="1" x:Name="ListBoxPacks" DisplayMemberPath="Name"></ListBox>
+
+
+        <StackPanel Grid.Row="2" Grid.Column="1">
+            <Button  x:Name="AjouterPack" Content="Ajouter" Command="{Binding CommandAddPack}" FontSize="20"/>
+            <Button  Content="Supprimer" x:Name="Supprimer" Command="{Binding CommandRemovePack}" FontSize="20"/>
+        </StackPanel>
+        <DataGrid 
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Margin="15"
+                    Background="Transparent"
+                    Name="DatagridClient"
+                    ItemsSource="{Binding Packs}"
+                    SelectedItem="{Binding SelectedPack}"
+                    DisplayMemberPath="Id"
+                    AutoGenerateColumns="False"
+                    RowBackground="Transparent"
+                    GridLinesVisibility="All"
+                    HorizontalGridLinesBrush="Black"
+                    VerticalGridLinesBrush="Black"
+                    VerticalAlignment="Top"
+                    IsReadOnly="False"
+                    CanUserAddRows="False"
+                    CanUserDeleteRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id"
+                            Binding="{Binding Id}"
+                            Width="*" />
+                <DataGridTextColumn Header="Nb slot"
+                            Binding="{Binding NumberSlot}"
+                            Width="*" />
+                <DataGridTextColumn Header="Prix"
+                            Binding="{Binding Price}"
+                            Width="*" />
+                <DataGridTextColumn Header="Nom"
+                            Binding="{Binding Name}"
+                            Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+
+
+
+
     </Grid>
 </UserControl>

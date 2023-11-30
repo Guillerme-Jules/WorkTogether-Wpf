@@ -6,18 +6,7 @@
         xmlns:local="clr-namespace:WorkTogether.Wpf"
         mc:Ignorable="d"
         Title="MainWindow" Height="900" Width="1600">
-    <Grid ShowGridLines="True">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <StackPanel x:Name="StackPanelMenu">
-            <Button x:Name="ListPack" Content="Liste des Packs" Click="ListPack_Click"/>
-            <Button x:Name="ListRack" Content="Liste des Baie" Click="ListRack_Click"/>
-            <Button x:Name="ListReservation" Content="Liste des Réservation" Click="ListReservation_Click"/>
-        </StackPanel>
-        <DockPanel x:Name="DockPanelShow" Grid.Column="1">
-            
-        </DockPanel>
+    <Grid x:Name="Affiche" ShowGridLines="True">
+        
     </Grid>
 </Window>

@@ -6,17 +6,22 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
+using WorkTogether.DBlib.Class;
 
 namespace WorkTogether.Wpf.Converters
 {
-    internal class ObjectToVisibilityConverter : IValueConverter
+    class ObjectToVisibilityComptConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             Visibility visibility = Visibility.Collapsed;
-            if (value != null && value != DependencyProperty.UnsetValue)
+            if (((User)value).Roles.Contains(parameter as string))
             {
                 visibility = Visibility.Visible;
+            }
+            else
+            {
+                visibility = Visibility.Collapsed;
             }
             return visibility;
         }
