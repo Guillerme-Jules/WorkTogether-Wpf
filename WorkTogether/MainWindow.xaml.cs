@@ -20,23 +20,16 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+        Affiche.Children.Clear();
+
+        Affiche.Children.Add(new ConnexionView());
     }
 
-    private void ListPack_Click(object sender, RoutedEventArgs e)
+
+    public void LoadMenuView()
     {
-        DockPanelShow.Children.Clear();
-        DockPanelShow.Children.Add(new ListPackView());
+        Affiche.Children.Add(new MenuView());
     }
 
-    private void ListRack_Click(object sender, RoutedEventArgs e)
-    {
-        DockPanelShow.Children.Clear();
-        DockPanelShow.Children.Add(new ListRackView());
-    }
 
-    private void ListReservation_Click(object sender, RoutedEventArgs e)
-    {
-        DockPanelShow.Children.Clear();
-        DockPanelShow.Children.Add(new ListReservationView());
-    }
 }

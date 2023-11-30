@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,21 +12,24 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WorkTogether.DBlib.Class;
 using WorkTogether.Wpf.ViewModels;
 
 namespace WorkTogether.Wpf.Views
 {
     /// <summary>
-    /// Logique d'interaction pour ListPackView.xaml
+    /// Logique d'interaction pour ListTicketView.xaml
     /// </summary>
-    public partial class ListPackView : UserControl
+    public partial class ListTicketView : UserControl
     {
-        public ListPackView()
+        public ListTicketView()
         {
             InitializeComponent();
-            this.DataContext = new PackViewModel();
+            this.DataContext = new TicketViewModel();
         }
-        
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            ((TicketViewModel)this.DataContext).Checked();
+        }
     }
 }

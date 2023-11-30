@@ -15,7 +15,13 @@ public partial class WorkTogetherContext : DbContext
     {
     }
 
+    public virtual DbSet<Accountant> Accountants { get; set; }
+
+    public virtual DbSet<Admin> Admins { get; set; }
+
     public virtual DbSet<Customer> Customers { get; set; }
+
+    public virtual DbSet<CustomerTicket> CustomerTickets { get; set; }
 
     public virtual DbSet<DoctrineMigrationVersion> DoctrineMigrationVersions { get; set; }
 
@@ -36,20 +42,28 @@ public partial class WorkTogetherContext : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+
         => optionsBuilder.UseSqlServer("Server=localhost;Database=WorkTogether;Trusted_Connection=True;TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Accountant>(entity =>
+        {
+            entity.ToTable("accountant");
+
+        });
+
+        modelBuilder.Entity<Admin>(entity =>
+        {
+            entity.ToTable("admin");
+
+        });
+
         modelBuilder.Entity<Customer>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__customer__3213E83FA73BB55D");
-
             entity.ToTable("customer");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("id");
+            
             entity.Property(e => e.Birthday).HasColumnName("birthday");
             entity.Property(e => e.FirstName)
                 .HasMaxLength(255)
@@ -57,15 +71,35 @@ public partial class WorkTogetherContext : DbContext
             entity.Property(e => e.LastName)
                 .HasMaxLength(255)
                 .HasColumnName("last_name");
+        });
 
-            entity.HasOne(d => d.IdNavigation).WithOne(p => p.Customer)
-                .HasForeignKey<Customer>(d => d.Id)
-                .HasConstraintName("FK_81398E09BF396750");
+        modelBuilder.Entity<CustomerTicket>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__customer__3213E83FE1EAD294");
+
+            entity.ToTable("customer_ticket");
+
+            entity.HasIndex(e => e.CustomerId, "IDX_266571F29395C3F3");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.CustomerId).HasColumnName("customer_id");
+            entity.Property(e => e.Description)
+                .HasMaxLength(500)
+                .HasColumnName("description");
+            entity.Property(e => e.Done).HasColumnName("done");
+            entity.Property(e => e.Name)
+                .HasMaxLength(255)
+                .HasColumnName("name");
+
+            entity.HasOne(d => d.Customer).WithMany(p => p.CustomerTickets)
+                .HasForeignKey(d => d.CustomerId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_266571F29395C3F3");
         });
 
         modelBuilder.Entity<DoctrineMigrationVersion>(entity =>
         {
-            entity.HasKey(e => e.Version).HasName("PK__doctrine__79B5C94C64D069B6");
+            entity.HasKey(e => e.Version).HasName("PK__doctrine__79B5C94C1FA87E7F");
 
             entity.ToTable("doctrine_migration_versions");
 
@@ -80,7 +114,7 @@ public partial class WorkTogetherContext : DbContext
 
         modelBuilder.Entity<MessengerMessage>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__messenge__3213E83F90B17D4A");
+            entity.HasKey(e => e.Id).HasName("PK__messenge__3213E83FA647F9D3");
 
             entity.ToTable("messenger_messages");
 
@@ -116,7 +150,7 @@ public partial class WorkTogetherContext : DbContext
 
         modelBuilder.Entity<Pack>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__pack__3213E83FEDF12037");
+            entity.HasKey(e => e.Id).HasName("PK__pack__3213E83F07690DF3");
 
             entity.ToTable("pack");
 
@@ -132,7 +166,7 @@ public partial class WorkTogetherContext : DbContext
 
         modelBuilder.Entity<Rack>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__rack__3213E83F437817BA");
+            entity.HasKey(e => e.Id).HasName("PK__rack__3213E83FCDA5A30D");
 
             entity.ToTable("rack");
 
@@ -142,7 +176,7 @@ public partial class WorkTogetherContext : DbContext
 
         modelBuilder.Entity<Reservation>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__reservat__3213E83F5F279DA8");
+            entity.HasKey(e => e.Id).HasName("PK__reservat__3213E83FE453D288");
 
             entity.ToTable("reservation");
 
@@ -184,7 +218,7 @@ public partial class WorkTogetherContext : DbContext
 
         modelBuilder.Entity<TypeReservation>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__type_res__3213E83F39BE2480");
+            entity.HasKey(e => e.Id).HasName("PK__type_res__3213E83FCFA57AB1");
 
             entity.ToTable("type_reservation");
 
@@ -198,7 +232,7 @@ public partial class WorkTogetherContext : DbContext
 
         modelBuilder.Entity<TypeUnit>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__type_uni__3213E83F90298F1B");
+            entity.HasKey(e => e.Id).HasName("PK__type_uni__3213E83FCDDFBAAA");
 
             entity.ToTable("type_unit");
 
@@ -210,7 +244,7 @@ public partial class WorkTogetherContext : DbContext
 
         modelBuilder.Entity<Unit>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__unit__3213E83F6F91538D");
+            entity.HasKey(e => e.Id).HasName("PK__unit__3213E83F94BD70BA");
 
             entity.ToTable("unit");
 
@@ -242,7 +276,7 @@ public partial class WorkTogetherContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__user__3213E83FA71D11A0");
+            entity.HasKey(e => e.Id).HasName("PK__user__3213E83F949A785F");
 
             entity.ToTable("user");
 

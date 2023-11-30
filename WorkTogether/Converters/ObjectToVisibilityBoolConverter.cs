@@ -9,16 +9,15 @@ using System.Windows.Data;
 
 namespace WorkTogether.Wpf.Converters
 {
-    internal class ObjectToVisibilityConverter : IValueConverter
+    internal class ObjectToVisibilityBoolConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            Visibility visibility = Visibility.Collapsed;
-            if (value != null && value != DependencyProperty.UnsetValue)
+            if (value is not bool)
             {
-                visibility = Visibility.Visible;
+                throw new Exception("L'objet doit être de type booléen");
             }
-            return visibility;
+            return (bool)value ? Visibility.Collapsed : Visibility.Visible;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

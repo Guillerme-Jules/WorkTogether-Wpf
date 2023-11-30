@@ -9,6 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="iTextSharp" Version="5.5.13.3" />
+    <PackageReference Include="Prism.Core" Version="8.1.97" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\OutilsWpf\ToolsWpf.Internal\ToolsWpf.Internal.csproj" />
     <ProjectReference Include="..\WorkTogether.DBlib\WorkTogether.DBlib.csproj" />
   </ItemGroup>

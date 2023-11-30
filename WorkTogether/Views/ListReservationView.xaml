@@ -9,14 +9,46 @@
     <Grid Background="DarkCyan" ShowGridLines="True">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="100"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <ListBox Grid.Row="1" Grid.Column="1" x:Name="ListBoxReservations" DisplayMemberPath="Name"></ListBox>
+        <DataGrid
+            Grid.Row="1" 
+            Grid.Column="1"
+            Margin="15"
+            Height="auto" 
+            Name="DatagridReservation"
+            ItemsSource="{Binding Reservations}"
+            SelectedItem="{Binding SelectedReservation}"
+            DisplayMemberPath="Id"
+            AutoGenerateColumns="False"
+            RowBackground="Transparent"
+            HorizontalGridLinesBrush="Black"
+            HorizontalAlignment="Left"
+            VerticalGridLinesBrush="Black"
+            VerticalAlignment="Top"
+            IsReadOnly="True"
+            >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="*"/>
+                <DataGridTextColumn Header="Code" Binding="{Binding Code}" Width="*"/>
+                <DataGridTextColumn Header="Prix" Binding="{Binding Price}" Width="*"/>
+                <DataGridTextColumn Header="Pack" Binding="{Binding Pack.Name}" Width="*"/>
+                <DataGridTextColumn Header="Client" Binding="{Binding Client.Email}" Width="*"/>
+                <DataGridTextColumn Header="Date de début" Binding="{Binding StartDate, StringFormat=d}" Width="*"/>
+                <DataGridTextColumn Header="Date de fin" Binding="{Binding EndDate, StringFormat=d}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Row="2" Grid.Column="1">
+            <Button  x:Name="PDFButton" Content="Enregistrer en PDF" Click="PDFButton_Click" />
+            <Button  x:Name="CSVButton" Content="Enregistrer en CSV" Click="CSVButton_Click" />
+        </StackPanel>
+        
     </Grid>
 </UserControl>

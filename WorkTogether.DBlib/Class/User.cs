@@ -18,5 +18,4 @@ public partial class User
 
     public string Discr { get; set; } = null!;
 
-    public virtual Customer? Customer { get; set; }
 }

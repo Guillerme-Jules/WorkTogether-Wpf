@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WorkTogether.Wpf.ViewModels;
 
 namespace WorkTogether.Wpf.Views
 {
@@ -23,6 +25,20 @@ namespace WorkTogether.Wpf.Views
         public ListReservationView()
         {
             InitializeComponent();
+            this.DataContext = new ReservationViewModel();
+        }
+
+
+        private void PDFButton_Click(object sender, RoutedEventArgs e)
+        {
+            ((ReservationViewModel)this.DataContext).ExportToPdf();
+
+            //Process.Start(@"C:\Users\Guillerme\BTS IIA\Csharp2\Moi\Document WorkTogether");
+        }
+
+        private void CSVButton_Click(object sender, RoutedEventArgs e)
+        {
+            ((ReservationViewModel)this.DataContext).ExportToCsv();
         }
     }
 }
