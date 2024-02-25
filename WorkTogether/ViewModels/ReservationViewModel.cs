@@ -20,17 +20,29 @@ namespace WorkTogether.Wpf.ViewModels
     {
 
         #region Fields
+        /// <summary>
+        /// La liste des reservations
+        /// </summary>
         private ObservableCollection<Reservation> _Reservations;
 
+        /// <summary>
+        /// La reservation selectionner
+        /// </summary>
         private Reservation _SelectedReservation;
         #endregion
 
         #region Properties
+        /// <summary>
+        /// Recuperer et modifier la liste des reservations
+        /// </summary>
         public ObservableCollection<Reservation> Reservations
         {
             get => _Reservations;
             set => SetProperty(nameof(Reservations), ref _Reservations, value);
         }
+        /// <summary>
+        /// Recuperer et modifier la reservation selectionner
+        /// </summary>
         public Reservation SelectedReservation
         {
             get => _SelectedReservation;
@@ -39,6 +51,9 @@ namespace WorkTogether.Wpf.ViewModels
         #endregion
 
         #region Constructors
+        /// <summary>
+        /// Construteur de ReservationViewModel
+        /// </summary>
         public ReservationViewModel()
         {
             using (WorkTogetherContext context = new WorkTogetherContext())
@@ -52,6 +67,9 @@ namespace WorkTogether.Wpf.ViewModels
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Methode d'export fichier pdf des reservations
+        /// </summary>
         internal void ExportToPdf()
         {
 
@@ -87,6 +105,9 @@ namespace WorkTogether.Wpf.ViewModels
             psi.Arguments = "C:\\Users\\Guillerme\\BTS IIA\\Csharp2\\Moi\\Document WorkTogether";
             Process.Start(psi);
         }
+        /// <summary>
+        /// Methode d'export fichier csv des reservations
+        /// </summary>
         internal void ExportToCsv()
         {
 

@@ -29,6 +29,7 @@ namespace WorkTogether.Wpf.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            
             ((ConnexionViewModel)this.DataContext).ConnexionValidator();
             
         }

@@ -17,6 +17,7 @@
             <Button x:Name="ListReservation" Content="Liste des Réservations" Click="ListReservation_Click" Style="{StaticResource ButtonMenu}"/>
             <Button x:Name="ListClient" Content="Liste des Clients" Click="ListClient_Click" Style="{StaticResource ButtonMenu}"/>
             <Button x:Name="ListTicket" Content="Liste des Tickets" Click="ListTicket_Click"  Style="{StaticResource ButtonMenu}" Visibility="{Binding Path=User, Source={x:Static Application.Current}, Converter={StaticResource SharedObjectToVisibilityComptConverter}, ConverterParameter='ROLE_ADMIN'}"/>
+            <Button x:Name="PercentageRack" Content="Espace utilisé des baies" Click="PercentageRack_Click"  Style="{StaticResource ButtonMenu}" Visibility="{Binding Path=User, Source={x:Static Application.Current}, Converter={StaticResource SharedObjectToVisibilityComptConverter}, ConverterParameter='ROLE_ADMIN'}"/>
         </StackPanel>
         <DockPanel x:Name="DockPanelShow" Grid.Column="1">
 

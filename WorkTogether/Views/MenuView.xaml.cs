@@ -66,5 +66,11 @@ namespace WorkTogether.Wpf.Views
             DockPanelShow.Children.Clear();
             DockPanelShow.Children.Add(new ListTicketView());
         }
+
+        private void PercentageRack_Click(object sender, RoutedEventArgs e)
+        {
+            DockPanelShow.Children.Clear();
+            DockPanelShow.Children.Add(new PercentageRackView());
+        }
     }
 }

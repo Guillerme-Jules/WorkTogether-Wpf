@@ -32,8 +32,6 @@ namespace WorkTogether.Wpf.Views
         private void PDFButton_Click(object sender, RoutedEventArgs e)
         {
             ((ReservationViewModel)this.DataContext).ExportToPdf();
-
-            //Process.Start(@"C:\Users\Guillerme\BTS IIA\Csharp2\Moi\Document WorkTogether");
         }
 
         private void CSVButton_Click(object sender, RoutedEventArgs e)

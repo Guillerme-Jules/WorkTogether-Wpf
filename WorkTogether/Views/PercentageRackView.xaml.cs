@@ -17,16 +17,19 @@ using WorkTogether.Wpf.ViewModels;
 namespace WorkTogether.Wpf.Views
 {
     /// <summary>
-    /// Logique d'interaction pour ListRackView.xaml
+    /// Logique d'interaction pour PercentageRackView.xaml
     /// </summary>
-    public partial class ListRackView : UserControl
+    public partial class PercentageRackView : UserControl
     {
-        public ListRackView()
+        public PercentageRackView()
         {
             InitializeComponent();
-            this.DataContext = new RackViewModel();
+            this.DataContext = new PercentageRackViewModel();
         }
 
-        
+        private void OccupationBaie_Click(object sender, RoutedEventArgs e)
+        {
+            ((PercentageRackViewModel)this.DataContext).ExportToPdf();
+        }
     }
 }
